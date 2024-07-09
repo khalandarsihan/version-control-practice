@@ -1,0 +1,110 @@
+ Here’s a summary of the steps we took to set up version control for your Ansible playbooks using Git and GitHub:
+
+### Step-by-Step Summary
+
+1. **Initialize a Git Repository:**
+   - We navigated to the project directory containing your Ansible playbooks and other files.
+   - Initialized a new Git repository in the directory:
+     ```sh
+     git init
+     ```
+
+2. **Stage and Commit Files:**
+   - We added all relevant files (including `ansible.cfg`, `hosts`, `playbook.yaml`, `Vagrantfile`, etc.) to the staging area:
+     ```sh
+     git add .
+     ```
+   - Committed the staged files with a descriptive message:
+     ```sh
+     git commit -m "Initial commit of Ansible playbooks"
+     ```
+
+3. **Create a Remote Repository on GitHub:**
+   - Created a new repository on GitHub named `ansible-playbooks`.
+
+4. **Add the Remote Repository to Local Git Configuration:**
+   - Added the remote repository URL to the local Git configuration:
+     ```sh
+     git remote add origin git@github.com:khalandarsihan/ansible-playbooks.git
+     ```
+
+5. **Generate an SSH Key (if needed):**
+   - Generated an SSH key pair if one did not already exist:
+     ```sh
+     ssh-keygen -t ed25519 -C "your_email@example.com"
+     ```
+   - Added the SSH private key to the SSH agent:
+     ```sh
+     eval "$(ssh-agent -s)"
+     ssh-add ~/.ssh/id_ed25519
+     ```
+
+6. **Add the SSH Public Key to GitHub:**
+   - Copied the SSH public key to the clipboard:
+     ```sh
+     cat ~/.ssh/id_ed25519.pub
+     ```
+   - Added the SSH public key to GitHub under **Settings > SSH and GPG keys**.
+
+7. **Verify SSH Connection:**
+   - Verified the SSH connection to GitHub to ensure proper configuration:
+     ```sh
+     ssh -T git@github.com
+     ```
+
+8. **Push Local Repository to GitHub:**
+   - Pushed the local repository to the remote repository on GitHub:
+     ```sh
+     git push -u origin master
+     ```
+
+### Key Configurations
+
+**`ansible.cfg` File:**
+```ini
+[defaults]
+inventory = hosts
+remote_user = vagrant
+private_key_file = .vagrant/machines/default/virtualbox/private_key
+host_key_checking = False
+```
+
+**`hosts` File:**
+```ini
+testserver ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222
+```
+
+### Summary of Commands Used
+- Initialize Git repository:
+  ```sh
+  git init
+  ```
+- Stage and commit files:
+  ```sh
+  git add .
+  git commit -m "Initial commit of Ansible playbooks"
+  ```
+- Add remote repository:
+  ```sh
+  git remote add origin git@github.com:khalandarsihan/ansible-playbooks.git
+  ```
+- Generate SSH key (if needed):
+  ```sh
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519
+  ```
+- Copy public key and add to GitHub:
+  ```sh
+  cat ~/.ssh/id_ed25519.pub
+  ```
+- Verify SSH connection:
+  ```sh
+  ssh -T git@github.com
+  ```
+- Push to remote repository:
+  ```sh
+  git push -u origin master
+  ```
+
+By following these steps, we successfully set up version control for your Ansible playbooks, ensuring that your configurations and scripts are securely tracked and managed using Git and GitHub.
